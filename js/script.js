@@ -20,7 +20,7 @@ FB.getLoginStatus(function(response) {
 	window.authToken = response.authResponse.accessToken; //取得authToken的方法。
 	FB.api('/me/picture?type=large', function(response){
 		$("#preview1").attr("src",response.data.url);//找到id為preview1的項目，把位址放進他的src項目中。
-	});
+	})
     
   } else if (response.status === 'not_authorized') {
     //要求使用者登入，索取publish_actions權限
@@ -103,9 +103,10 @@ FB.getLoginStatus(function(response) {
 			profileIMG.crossOrigin = "Anonymous"; // 這務必要做，為了讓Facebook的照片能夠crossdomain傳入到你的頁面，CORS Policy請參考https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image 
 			//canvas.width = profileIMG.width;//設定canvas的大小需符合profileimg的大小
 			//canvas.height = profileIMG.height;
-			ctx.drawImage(profileIMG,0,0);//從XY軸0，0值開始畫如profileimg
+			
+			ctx.drawImage(img,0,0); //劃入img2
 			ctx.drawImage(img3,canMouseX-128/2,canMouseY-120/2); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
-			ctx.drawImage(img2,0,0); //劃入img2
+			ctx.drawImage(profileIMG,0,0);//從XY軸0，0值開始畫如profileimg
 			
 			var inputedText = $('#inputed').val();//抓取頁面inputed ID的內容
 			ctx.fillStyle = "black"; //字體顏色
