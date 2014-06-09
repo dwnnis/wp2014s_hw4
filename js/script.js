@@ -17,7 +17,7 @@ window.fbAsyncInit = function () {//facebook init
 FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
     //呼叫api把圖片放到#preview IMG tag 內
-	window.authToken = response.authResponse.accessToken; //取得authToken的方法。
+	window.authToken = response.authResponse.accessToken //取得authToken的方法。
 	FB.api('/me/picture?type=large', function(response){
 		$("#preview1").attr("src",response.data.url);//找到id為preview1的項目，把位址放進他的src項目中。
 	})
@@ -54,9 +54,9 @@ FB.getLoginStatus(function(response) {
 	ctx.font='20px "Arial"'; //設定字體與大小
 	ctx.fillText("Click here to start fill with Facebook Profile Picture", 40, 270); //設定預設的開始畫面
     var img = new Image(); // 新增圖像1
-    img.src = "img/overlay.png"; //圖像路徑（路徑自己設，且自己加入想要的圖層）
-	var img2 = new Image(); //新增圖像2
-	img2.src = "img/overlayback.png" //圖像路徑
+    img.src = "img/elephant.png"; //圖像路徑（路徑自己設，且自己加入想要的圖層）
+	//var img2 = new Image(); //新增圖像2
+	//img2.src = "img/overlayback.png" //圖像路徑
 	var img3 = new Image();//新增圖像3
 	img3.src = "img/typography.png"//圖像路徑
 	
@@ -111,7 +111,7 @@ FB.getLoginStatus(function(response) {
 			var inputedText = $('#inputed').val();//抓取頁面inputed ID的內容
 			ctx.fillStyle = "black"; //字體顏色
 			ctx.font='20px "微軟正黑體"'; //字體大小和字形
-			ctx.fillText(inputedText, canMouseX-1/2,canMouseY-30/2); //字體也可以依據滑鼠游標移動，所輸入的值可自行調整，若不想移動輸入的字體，可以把它改成（inputedText,0,0)X Y軸 0，0的位置
+			ctx.fillText(inputedText, 0,0); //字體也可以依據滑鼠游標移動，所輸入的值可自行調整，若不想移動輸入的字體，可以把它改成（inputedText,0,0)X Y軸 0，0的位置
       }
     }
 
