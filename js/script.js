@@ -24,28 +24,24 @@ FB.getLoginStatus(function(response) {
     
   } else if (response.status === 'not_authorized') {
     //要求使用者登入，索取publish_actions權限
+	login();
+	
+  } else {
+    //同樣要求使用者登入
+	login();
+	}
+ });
+
+ function login(){
 	FB.login(function(response) {
 		 if (response.authResponse) {
-            $('#welcome').html('please wait a moment.....')
+            //$('#welcome').html('please wait a moment.....')
             window.location.reload();
          }
 		 else{}
 	},
 	{scope:'publish_actions'});
-	
-  } else {
-    //同樣要求使用者登入
-		FB.login(function(response) {
-		 if (response.authResponse) {
-            $('#welcome').html('please wait a moment.....')
-            window.location.reload();
-         }
-		 else{}
-		},
-		{scope:'publish_actions'});
-	}
- });
-
+ }
 
 //以下為canvas的程式碼，基本上不需多動，依據comments修改即可
 	
