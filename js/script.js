@@ -16,32 +16,36 @@ window.fbAsyncInit = function () {//facebook init
 
 FB.getLoginStatus(function(response) {
   if (response.status === 'connected') {
-    //呼叫api把圖片放到#preview IMG tag 內
-	window.authToken = response.authResponse.accessToken //取得authToken的方法。
-	FB.api('/me/picture?type=large', function(response){
-		$("#preview1").attr("src",response.data.url);//找到id為preview1的項目，把位址放進他的src項目中。
-	})
+		//呼叫api把圖片放到#preview IMG tag 內
+		window.authToken = response.authResponse.accessToken //取得authToken的方法。
+		FB.api('/me/picture?type=large', function(response){
+			$("#preview1").attr("src",response.data.url);//找到id為preview1的項目，把位址放進他的src項目中。
+		})
     
   } else if (response.status === 'not_authorized') {
-    //要求使用者登入，索取publish_actions權限
-	login();
+		//要求使用者登入，索取publish_actions權限
+		FB.login(function(response) {
+			 if (response.authResponse) {
+				//$('#welcome').html('please wait a moment.....')
+				window.location.reload();
+			 }
+			 else{}
+		},
+		{scope:'publish_actions'});
 	
   } else {
-    //同樣要求使用者登入
-	login();
+		//同樣要求使用者登入
+			FB.login(function(response) {
+			 if (response.authResponse) {
+				//$('#welcome').html('please wait a moment.....')
+				window.location.reload();
+			 }
+			 else{}
+			},
+			{scope:'publish_actions'});
 	}
  });
 
- function login(){
-	FB.login(function(response) {
-		 if (response.authResponse) {
-            //$('#welcome').html('please wait a moment.....')
-            window.location.reload();
-         }
-		 else{}
-	},
-	{scope:'publish_actions'});
- }
 
 //以下為canvas的程式碼，基本上不需多動，依據comments修改即可
 	
@@ -101,13 +105,13 @@ FB.getLoginStatus(function(response) {
 			//canvas.height = profileIMG.height;
 			
 			ctx.drawImage(img,0,0); //劃入img2
-			ctx.drawImage(img3,180,440); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
+			ctx.drawImage(img3,100,440); //劃入img3，並根據你的滑鼠游標移動，你可以自行更換想要移動的圖層，數值會因XY軸向有所不同
 			ctx.drawImage(profileIMG,canMouseX,canMouseY);//從XY軸0，0值開始畫如profileimg
 			
 			var inputedText = $('#inputed').val();//抓取頁面inputed ID的內容
 			ctx.fillStyle = "black"; //字體顏色
 			ctx.font='20px "微軟正黑體"'; //字體大小和字形
-			ctx.fillText(inputedText, 0,0); //字體也可以依據滑鼠游標移動，所輸入的值可自行調整，若不想移動輸入的字體，可以把它改成（inputedText,0,0)X Y軸 0，0的位置
+			ctx.fillText(inputedText, 100,100); //字體也可以依據滑鼠游標移動，所輸入的值可自行調整，若不想移動輸入的字體，可以把它改成（inputedText,0,0)X Y軸 0，0的位置
       }
     }
 
